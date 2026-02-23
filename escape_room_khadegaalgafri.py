@@ -1,6 +1,5 @@
-# NAME: khadega algafri
+# NAME: Khadega Algafri
 # DATE: February 21, 2026
-#I certify that this work is my own: 
 # SIGNATURE: khadegaalgafri
 
 def create_rooms():
