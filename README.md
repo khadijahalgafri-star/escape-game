@@ -14,4 +14,4 @@ This game allows the player to explore rooms, talk to NPCs, collect items, and t
 ## How to Run
 Download the file and run:
 
-python escape_room_khadegaalgafri.py
+python main.py
