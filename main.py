@@ -11,7 +11,9 @@ def create_rooms():
                 "desk": "an old oak desk. You find a **rusty key** in the drawer!",
                 "bookshelf": "Shelves of books. One looks like a secret lever."
             },
-            "items": ["rusty key"],
+            "hidden_items": {
+                "desk": "rusty key"
+            },
             "visited": False
         }, 
         "hallway": {
@@ -29,7 +31,9 @@ def create_rooms():
                 "fountain": "You spot a silver shard in the shimmering water",
                 "statue": "It looks to be a Knight pointing North."
             },
-            "items": ["silver shard"],
+            "hidden_items": {
+                "fountain": "silver shard"
+            },
             "visited": False
         }
     }
@@ -132,17 +136,26 @@ def examine_object(obj_name, current_room_data ,inventory):
 
     if obj_name in current_room_data['details']:
         print(f"\n{current_room_data['details'][obj_name]}")
-        if "items" in current_room_data and len(current_room_data["items"]) > 0:
-            item = current_room_data["items"].pop(0)
-            print(f"Added {item} to inventory")
-            inventory.append(item)
+        # Check if this object has a hidden item
+        hidden_items = current_room_data.get("hidden_items", {})
+
+        if obj_name in hidden_items:
+            item = hidden_items[obj_name]
+
+            if item not in inventory:
+                print(f"You found {item}!")
+                inventory.append(item)
+            else:
+                print("You already took this item.")
+        else:
+            print("Nothing special found here.")
 
     else:
         print(f"You don't see any {obj_name} here.")
 
     # if obj_name == "desk":
     #     print("You seach the desk drawers...")
-    #     if "rusty key" not in inventory:
+    #     if "rusty key" n# if obj_name == "desot in inventory:
     #         print("You found a rusty key!")
     #         inventory.append("rusty key")
     #         return True
