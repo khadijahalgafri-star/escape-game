@@ -152,29 +152,7 @@ def examine_object(obj_name, current_room_data ,inventory):
 
     else:
         print(f"You don't see any {obj_name} here.")
-
-    # if obj_name == "desk":
-    #     print("You seach the desk drawers...")
-    #     if "rusty key" n# if obj_name == "desot in inventory:
-    #         print("You found a rusty key!")
-    #         inventory.append("rusty key")
-    #         return True
-    #     else:
-    #         print("The desk is empty now")
-    #         return False
-    # elif obj_name == "bookshelf":
-    #     print("\nYou examine the bookshelf...")
-    #     if "mysterious book" not in inventory:
-    #         print("One book seems different. You take it.")
-    #         inventory.append("mysterious book")
-    #         return True
-    #     else:
-    #         print("Just dusty old books.")
-    #         return False
-    
-    # else:
-    #     print(f"\nYou can't examine '{obj_name}'. Try 'desk' or 'bookshelf'.")
-    #     return False
+        
 
 def describe_room(room_name, rooms, npcs):
     """
@@ -277,7 +255,21 @@ def examine_inventory_item(inventory, items_db):# this function allows the playe
     if item_name in get_valuable_items([item_name], items_db):
         print("★ This is a valuable item! ★")
 
-    return True
+    return True 
+
+def show_help():
+    print("\n" + "="*50)
+    print("HELP / HOW TO PLAY")
+    print("="*50)
+    print("1) Look around: shows room description + objects + NPCs")
+    print("2) Move: choose north/south/east/west if available")
+    print("3) Inventory: see what you collected")
+    print("4) Examine object: type an object name")
+    print("5) Talk: type an NPC name")
+    print("6) Examine inventory item")
+    print("7) Escape: try the exit")
+    print("\nTip: Explore and talk to everyone!")
+
 def main(): # main function to run the game loop
     """
     Welcome to our Escape Room. 
@@ -310,9 +302,10 @@ def main(): # main function to run the game loop
         print("5. Talk to someone")
         print("6. Examine an item in your inventory")
         print("7. Try to escape")
-        print("8. Quit game")
+        print("8. Help")
+        print("9. Quit game")
     
-        choice = input("Enter your choice (1-8): ")
+        choice = input("Enter your choice (1-9): ")
         # print(f"DEBUG you chose number {choice}")
         moves += 1
 
@@ -355,18 +348,22 @@ def main(): # main function to run the game loop
                 game_over = True
             else:
                 print("The door is locked. You need to find a key!")
+                moves -= 1
         elif choice == "8":
+            show_help()
+            moves -= 1
+            continue
+        elif choice == "9":
             print(f"\nThanks for playing, {player_name}! You made {moves} moves.")
             game_over = True
-
-        else: 
-            print("\nInvalid choice. Try again ")
-            moves -= 1
-
-    print("\nGame Over!")
+            print("\nGame Over!")
 
 if __name__ == "__main__":
     main()  
+
+    
+    
+
 
     
     
